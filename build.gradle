@@ -40,7 +40,7 @@ dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
 }
 
-def hsql = 'org.hsqldb:hsqldb:2.4.1'
+def mysql = 'mysql:mysql-connector-java:8.0.15'
 
 configure([globalModule, coreModule, webModule]) {
     apply(plugin: 'java')
@@ -86,8 +86,8 @@ configure(coreModule) {
     dependencies {
         compile(globalModule)
         compileOnly(servletApi)
-        jdbc(hsql)
-        testRuntime(hsql)
+        jdbc(mysql)
+        testRuntime(mysql)
     }
 
     task cleanConf(description: 'Cleans up conf directory') {
@@ -107,19 +107,21 @@ configure(coreModule) {
     }
 
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
-        dbms = 'hsql'
-        host = 'localhost:9010'
-        dbName = 'carswire-TTDgxCqBq'
-        dbUser = 'sa'
-        dbPassword = ''
+        dbms = 'mysql'
+        host = 'localhost'
+        dbName = 'carswire'
+        dbUser = 'root'
+        dbPassword = 'kawasaki'
+        connectionParams = '?useSSL=false&allowMultiQueries=true&serverTimezone=UTC'
     }
 
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
-        dbms = 'hsql'
-        host = 'localhost:9010'
-        dbName = 'carswire-TTDgxCqBq'
-        dbUser = 'sa'
-        dbPassword = ''
+        dbms = 'mysql'
+        host = 'localhost'
+        dbName = 'carswire'
+        dbUser = 'root'
+        dbPassword = 'kawasaki'
+        connectionParams = '?useSSL=false&allowMultiQueries=true&serverTimezone=UTC'
     }
 }
 
