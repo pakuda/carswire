@@ -4,5 +4,6 @@
 
         <class>com.company.carswire.entity.Brand</class>
         <class>com.company.carswire.entity.Model</class>
+        <class>com.company.carswire.entity.Country</class>
     </persistence-unit>
 </persistence>
